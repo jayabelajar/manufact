@@ -1,0 +1,33 @@
+-- psql import helper.
+-- Run from the project root after sql/02_create_tables.sql:
+--
+-- \c manufacturing_production
+-- \copy production (
+--     work_order_id,
+--     production_date,
+--     year,
+--     quarter,
+--     month,
+--     month_name,
+--     year_month,
+--     plant,
+--     product_line,
+--     machine_id,
+--     product,
+--     operator,
+--     shift,
+--     order_status,
+--     planned_quantity,
+--     produced_quantity,
+--     defect_quantity,
+--     good_production,
+--     downtime_minutes,
+--     production_cost,
+--     production_achievement_pct,
+--     defect_rate_pct,
+--     production_gap,
+--     cost_per_unit,
+--     source_defect_rate_pct
+-- ) FROM 'data/processed/manufacturing_clean.csv' WITH (FORMAT csv, HEADER true);
+--
+-- Then run sql/03_data_cleaning.sql and sql/04_kpi_analysis.sql.
