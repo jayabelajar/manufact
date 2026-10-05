@@ -1,4 +1,4 @@
--- Run this after importing data/processed/manufacturing_clean.csv into production.
+-- Run this after importing data/processed/inventara_clean.csv into production.
 
 DELETE FROM production a
 USING production b

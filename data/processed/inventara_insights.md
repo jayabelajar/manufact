@@ -1,4 +1,4 @@
-# Manufacturing Production Insights
+# Inventara Production Insights
 
 ## Executive KPI
 

@@ -11,7 +11,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-CSV_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_clean.csv"
+CSV_PATH = ROOT_DIR / "data" / "processed" / "inventara_clean.csv"
 CREATE_TABLE_SQL = ROOT_DIR / "sql" / "02_create_tables.sql"
 CLEANING_SQL = ROOT_DIR / "sql" / "03_data_cleaning.sql"
 
@@ -97,14 +97,12 @@ def count_rows(conn) -> int:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Import cleaned manufacturing production data into PostgreSQL."
-    )
+    parser = argparse.ArgumentParser(description="Import cleaned Inventara data into PostgreSQL.")
     parser.add_argument("--host", default=env("PGHOST", "localhost"))
     parser.add_argument("--port", default=env("PGPORT", "5432"))
     parser.add_argument("--user", default=env("PGUSER", "postgres"))
     parser.add_argument("--password", default=env("PGPASSWORD", "postgres"))
-    parser.add_argument("--database", default=env("PGDATABASE", "manufacturing_production"))
+    parser.add_argument("--database", default=env("PGDATABASE", "inventara"))
     parser.add_argument("--admin-db", default=env("PGADMIN_DB", "postgres"))
     parser.add_argument("--csv", type=Path, default=CSV_PATH)
     parser.add_argument(

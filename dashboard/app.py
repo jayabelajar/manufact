@@ -8,7 +8,7 @@ import streamlit as st
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-PROCESSED_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_clean.csv"
+PROCESSED_PATH = ROOT_DIR / "data" / "processed" / "inventara_clean.csv"
 RAW_PATH = ROOT_DIR / "data" / "raw" / "manufacturing.csv"
 SRC_DIR = ROOT_DIR / "src"
 REQUIRED_COLUMNS = {
@@ -32,7 +32,7 @@ REQUIRED_COLUMNS = {
 
 
 st.set_page_config(
-    page_title="Manufacturing Dashboard",
+    page_title="Inventara Dashboard",
     layout="wide",
 )
 
@@ -137,7 +137,7 @@ def rate_by_group(
 
 df = load_data()
 
-st.title("Manufacturing Production Dashboard")
+st.title("Inventara Production Dashboard")
 st.caption(
     "Interactive monitoring for production achievement, product quality, machine downtime, and production cost."
 )

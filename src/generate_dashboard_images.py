@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_clean.csv"
+DATA_PATH = ROOT_DIR / "data" / "processed" / "inventara_clean.csv"
 IMAGE_DIR = ROOT_DIR / "images"
 
 
@@ -86,7 +86,7 @@ def base_page(title: str) -> tuple[Image.Image, ImageDraw.ImageDraw]:
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
     draw.text((46, 34), title, fill=INK, font=font(42, bold=True))
-    draw.text((48, 84), "Manufacturing Production Performance Dashboard", fill=MUTED, font=font(22))
+    draw.text((48, 84), "Inventara Production Performance Dashboard", fill=MUTED, font=font(22))
     return image, draw
 
 

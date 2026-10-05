@@ -60,8 +60,8 @@ The interactive Inventara dashboard is available in `dashboard/app.py`.
 data/
   manufacturing-production-ksa-2024-2026.csv
   raw/manufacturing.csv
-  processed/manufacturing_clean.csv
-  processed/manufacturing_insights.md
+  processed/inventara_clean.csv
+  processed/inventara_insights.md
 notebooks/
   01_data_cleaning.ipynb
   02_eda.ipynb
@@ -129,8 +129,8 @@ python -m streamlit run dashboard/app.py
 
 Outputs:
 
-- `data/processed/manufacturing_clean.csv`
-- `data/processed/manufacturing_insights.md`
+- `data/processed/inventara_clean.csv`
+- `data/processed/inventara_insights.md`
 - `images/overview.png`
 - `images/quality.png`
 - `images/downtime.png`
@@ -146,12 +146,12 @@ Automatic import:
 python src/import_to_postgres.py --host localhost --port 5432 --user postgres --password postgres
 ```
 
-The importer creates the `manufacturing_production` database when possible, recreates the `production` table, imports `data/processed/manufacturing_clean.csv`, and runs SQL cleaning checks.
+The importer creates the `inventara` database when possible, recreates the `production` table, imports `data/processed/inventara_clean.csv`, and runs SQL cleaning checks.
 
 Manual import:
 
 1. Run `sql/01_create_database.sql`.
-2. Connect to `manufacturing_production`.
+2. Connect to `inventara`.
 3. Run `sql/02_create_tables.sql`.
 4. Run the `\copy` helper in `sql/05_import_clean_csv.sql`.
 5. Run `sql/03_data_cleaning.sql`.
