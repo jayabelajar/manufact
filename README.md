@@ -4,8 +4,6 @@ End-to-end manufacturing analytics project for monitoring production achievement
 
 The workflow uses Python for data cleaning and dashboard image generation, PostgreSQL for analytical querying, and notebooks for exploratory data analysis.
 
-Power BI is not required for this project. Dashboard previews are generated as static images with Python.
-
 ![Production Overview](images/overview.png)
 
 ## Business Context
