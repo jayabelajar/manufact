@@ -1,14 +1,14 @@
-# FactoryPulse Manufacturing Analytics
+# manufact
 
 End-to-end manufacturing analytics project for monitoring production achievement, product quality, machine downtime, and production cost across Saudi manufacturing production orders from 2024 to 2026.
 
-This project is built as a complete analytics portfolio without requiring Power BI. The workflow uses Python for data cleaning and dashboard image generation, PostgreSQL/SQL for analytical querying, and notebooks for exploratory data analysis. Power BI assets are kept only as an optional extension.
+The workflow uses Python for data cleaning and dashboard image generation, PostgreSQL for analytical querying, and notebooks for exploratory data analysis.
 
 ![Production Overview](images/overview.png)
 
 ## Business Context
 
-Manufacturing teams need a clear view of whether production output meets plan, which product lines create quality risk, which machines cause downtime, and which products drive high unit cost. This project turns raw production order data into clean analytical tables, KPI summaries, SQL-ready datasets, and dashboard preview images that can be used in a portfolio, report, or BI handoff.
+Manufacturing teams need a clear view of whether production output meets plan, which product lines create quality risk, which machines cause downtime, and which products drive high unit cost. This project turns raw production order data into clean analytical tables, KPI summaries, SQL-ready datasets, and dashboard preview images.
 
 ## Key Questions
 
@@ -33,7 +33,7 @@ Manufacturing teams need a clear view of whether production output meets plan, w
 
 ## Dashboard Preview
 
-The dashboard previews are generated from the cleaned dataset using Python, so the project can be presented without designing a Power BI report.
+The dashboard previews are generated from the cleaned dataset using Python.
 
 | Production Overview | Quality Analysis |
 | --- | --- |
@@ -50,7 +50,6 @@ The dashboard previews are generated from the cleaned dataset using Python, so t
 - **Pillow:** static dashboard preview rendering
 - **PostgreSQL:** relational schema, import workflow, analytical SQL
 - **Jupyter Notebook:** exploratory data analysis
-- **Power BI:** optional DAX and report build guide
 
 ## Project Structure
 
@@ -77,9 +76,6 @@ images/
   quality.png
   downtime.png
   cost.png
-dashboard/
-  dax_measures.md
-  powerbi_build_guide.md
 ```
 
 ## Dataset
@@ -150,13 +146,6 @@ Manual import:
 - **LED Panels** has the highest cost per unit at **SAR 118.84**.
 - Operational review should prioritize high-defect production lines, high-downtime machines, and products with above-average unit cost.
 
-## Optional Power BI Extension
-
-Power BI is not required to present this project. If a `.pbix` version is needed later, reusable DAX measures and a report build guide are available in the `dashboard/` folder:
-
-- `dashboard/dax_measures.md`
-- `dashboard/powerbi_build_guide.md`
-
 ## Deliverables
 
 - Cleaned manufacturing production dataset
@@ -165,4 +154,3 @@ Power BI is not required to present this project. If a `.pbix` version is needed
 - PostgreSQL schema and SQL analysis queries
 - KPI insight report
 - Python-generated dashboard preview images
-- Optional Power BI DAX measures and build guide
