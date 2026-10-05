@@ -1,25 +1,92 @@
-# Manufacturing Production Performance Dashboard
+# FactoryPulse Manufacturing Analytics
 
-End-to-end data analytics project for monitoring production achievement, product quality, machine downtime, and production cost from Saudi manufacturing production orders for 2024-2026.
+End-to-end manufacturing analytics project for monitoring production achievement, product quality, machine downtime, and production cost across Saudi manufacturing production orders from 2024 to 2026.
+
+This project is built as a complete analytics portfolio without requiring Power BI. The workflow uses Python for data cleaning and dashboard image generation, PostgreSQL/SQL for analytical querying, and notebooks for exploratory data analysis. Power BI assets are kept only as an optional extension.
+
+![Production Overview](images/overview.png)
+
+## Business Context
+
+Manufacturing teams need a clear view of whether production output meets plan, which product lines create quality risk, which machines cause downtime, and which products drive high unit cost. This project turns raw production order data into clean analytical tables, KPI summaries, SQL-ready datasets, and dashboard preview images that can be used in a portfolio, report, or BI handoff.
+
+## Key Questions
+
+- How much actual production was delivered compared with planned production?
+- Which product lines and products have the highest defect volume or defect rate?
+- Which machines contribute the most downtime?
+- Which products and plants drive the highest production cost?
+- What operational areas should be prioritized for improvement?
+
+## Executive Summary
+
+- Total orders: **3,000**
+- Planned production: **30.03M units**
+- Actual production: **25.08M units**
+- Production achievement: **83.50%**
+- Production gap: **-4.95M units**
+- Good production: **24.15M units**
+- Defect rate: **3.69%**
+- Downtime: **294,674 minutes**
+- Production cost: **SAR 1.13B**
+- Cost per unit: **SAR 45.11**
+
+## Dashboard Preview
+
+The dashboard previews are generated from the cleaned dataset using Python, so the project can be presented without designing a Power BI report.
+
+| Production Overview | Quality Analysis |
+| --- | --- |
+| ![Production Overview](images/overview.png) | ![Quality Analysis](images/quality.png) |
+
+| Downtime & Performance | Cost Analysis |
+| --- | --- |
+| ![Downtime and Performance](images/downtime.png) | ![Cost Analysis](images/cost.png) |
+
+## Tech Stack
+
+- **Python:** data cleaning, KPI generation, dashboard image generation
+- **Pandas / NumPy:** transformation and metric calculation
+- **Pillow:** static dashboard preview rendering
+- **PostgreSQL:** relational schema, import workflow, analytical SQL
+- **Jupyter Notebook:** exploratory data analysis
+- **Power BI:** optional DAX and report build guide
 
 ## Project Structure
 
 ```text
-data/raw/manufacturing.csv
-data/processed/manufacturing_clean.csv
-notebooks/01_data_cleaning.ipynb
-notebooks/02_eda.ipynb
+data/
+  raw/manufacturing.csv
+  processed/manufacturing_clean.csv
+  processed/manufacturing_insights.md
+notebooks/
+  01_data_cleaning.ipynb
+  02_eda.ipynb
 sql/
-dashboard/
+  01_create_database.sql
+  02_create_tables.sql
+  03_data_cleaning.sql
+  04_kpi_analysis.sql
+  05_import_clean_csv.sql
+src/
+  preprocess.py
+  import_to_postgres.py
+  generate_dashboard_images.py
 images/
-src/preprocess.py
+  overview.png
+  quality.png
+  downtime.png
+  cost.png
+dashboard/
+  dax_measures.md
+  powerbi_build_guide.md
 ```
 
 ## Dataset
 
-Source file: `docs/manufacturing-production-ksa-2024-2026.csv`
+Source file: `data/manufacturing-production-ksa-2024-2026.csv`
 
-The cleaned dataset standardizes column names, parses production dates, validates production values, removes duplicates, and adds derived metrics:
+The cleaning pipeline standardizes column names, parses production dates, validates production values, removes duplicates, and creates analysis-ready metrics:
 
 - `good_production`
 - `production_achievement_pct`
@@ -30,15 +97,32 @@ The cleaned dataset standardizes column names, parses production dates, validate
 
 ## How to Run
 
+Install dependencies:
+
 ```bash
 pip install -r requirements.txt
+```
+
+Run the preprocessing pipeline:
+
+```bash
 python src/preprocess.py
 ```
 
-Output:
+Generate dashboard preview images:
+
+```bash
+python src/generate_dashboard_images.py
+```
+
+Outputs:
 
 - `data/processed/manufacturing_clean.csv`
 - `data/processed/manufacturing_insights.md`
+- `images/overview.png`
+- `images/quality.png`
+- `images/downtime.png`
+- `images/cost.png`
 
 ## PostgreSQL Workflow
 
@@ -59,24 +143,26 @@ Manual import:
 5. Run `sql/03_data_cleaning.sql`.
 6. Use `sql/04_kpi_analysis.sql` for KPI and dashboard analysis queries.
 
-## Power BI Workflow
+## Insights
 
-Use `dashboard/dax_measures.md` for measures and `dashboard/powerbi_build_guide.md` for page layout.
-Preview images are available in `images/`.
+- Food & Beverage has the highest defect rate at **3.80%**.
+- Machine **MC-017** records the highest downtime at **10,779 minutes** with production achievement of **77.88%**.
+- **LED Panels** has the highest cost per unit at **SAR 118.84**.
+- Operational review should prioritize high-defect production lines, high-downtime machines, and products with above-average unit cost.
 
-Recommended pages:
+## Optional Power BI Extension
 
-- Production Overview
-- Quality Analysis
-- Downtime & Performance
-- Cost Analysis
+Power BI is not required to present this project. If a `.pbix` version is needed later, reusable DAX measures and a report build guide are available in the `dashboard/` folder:
 
-## Key Deliverables
+- `dashboard/dax_measures.md`
+- `dashboard/powerbi_build_guide.md`
 
-- Clean dataset
-- Python data cleaning pipeline
+## Deliverables
+
+- Cleaned manufacturing production dataset
+- Automated Python preprocessing pipeline
 - EDA notebooks
-- PostgreSQL schema and SQL analysis
-- Power BI DAX measures and build guide
-- Dashboard preview screenshots
-- Data-driven business insights
+- PostgreSQL schema and SQL analysis queries
+- KPI insight report
+- Python-generated dashboard preview images
+- Optional Power BI DAX measures and build guide
