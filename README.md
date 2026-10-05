@@ -35,6 +35,8 @@ Manufacturing teams need a clear view of whether production output meets plan, w
 
 The dashboard previews are generated from the cleaned dataset using Python.
 
+An interactive Streamlit dashboard is also available in `dashboard/app.py`.
+
 | Production Overview | Quality Analysis |
 | --- | --- |
 | ![Production Overview](images/overview.png) | ![Quality Analysis](images/quality.png) |
@@ -48,6 +50,7 @@ The dashboard previews are generated from the cleaned dataset using Python.
 - **Python:** data cleaning, KPI generation, dashboard image generation
 - **Pandas / NumPy:** transformation and metric calculation
 - **Pillow:** static dashboard preview rendering
+- **Streamlit:** interactive dashboard application
 - **PostgreSQL:** relational schema, import workflow, analytical SQL
 - **Jupyter Notebook:** exploratory data analysis
 
@@ -118,7 +121,7 @@ python src/generate_dashboard_images.py
 Run the interactive Streamlit dashboard:
 
 ```bash
-streamlit run dashboard/app.py
+python -m streamlit run dashboard/app.py
 ```
 
 Outputs:
@@ -166,3 +169,4 @@ Manual import:
 - PostgreSQL schema and SQL analysis queries
 - KPI insight report
 - Python-generated dashboard preview images
+- Streamlit dashboard app

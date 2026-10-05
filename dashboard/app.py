@@ -11,6 +11,24 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 PROCESSED_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_clean.csv"
 RAW_PATH = ROOT_DIR / "data" / "raw" / "manufacturing.csv"
 SRC_DIR = ROOT_DIR / "src"
+REQUIRED_COLUMNS = {
+    "work_order_id",
+    "production_date",
+    "year",
+    "year_month",
+    "plant",
+    "product_line",
+    "machine_id",
+    "product",
+    "planned_quantity",
+    "produced_quantity",
+    "defect_quantity",
+    "good_production",
+    "downtime_minutes",
+    "production_cost",
+    "production_achievement_pct",
+    "defect_rate_pct",
+}
 
 
 st.set_page_config(
@@ -31,6 +49,10 @@ def load_data() -> pd.DataFrame:
 
     df["production_date"] = pd.to_datetime(df["production_date"], errors="coerce")
     df["year_month"] = df["production_date"].dt.to_period("M").astype(str)
+    missing_columns = REQUIRED_COLUMNS - set(df.columns)
+    if missing_columns:
+        missing = ", ".join(sorted(missing_columns))
+        raise ValueError(f"Dataset is missing required columns: {missing}")
     return df.dropna(subset=["production_date"])
 
 
@@ -71,12 +93,19 @@ def filter_multiselect(label: str, values: pd.Series) -> list[str]:
 
 
 def metric_row(kpis: dict[str, float]) -> None:
-    cols = st.columns(5)
-    cols[0].metric("Actual Production", format_number(kpis["produced"]))
-    cols[1].metric("Achievement", f"{kpis['achievement']:.2f}%")
-    cols[2].metric("Defect Rate", f"{kpis['defect_rate']:.2f}%")
-    cols[3].metric("Downtime", f"{format_number(kpis['downtime'])} min")
-    cols[4].metric("Cost / Unit", f"SAR {kpis['cost_per_unit']:.2f}")
+    first_row = st.columns(5)
+    first_row[0].metric("Orders", format_number(kpis["orders"]))
+    first_row[1].metric("Planned Production", format_number(kpis["planned"]))
+    first_row[2].metric("Actual Production", format_number(kpis["produced"]))
+    first_row[3].metric("Achievement", f"{kpis['achievement']:.2f}%")
+    first_row[4].metric("Production Gap", format_number(kpis["gap"]))
+
+    second_row = st.columns(5)
+    second_row[0].metric("Good Production", format_number(kpis["good"]))
+    second_row[1].metric("Defect Quantity", format_number(kpis["defects"]))
+    second_row[2].metric("Defect Rate", f"{kpis['defect_rate']:.2f}%")
+    second_row[3].metric("Downtime", f"{format_number(kpis['downtime'])} min")
+    second_row[4].metric("Cost / Unit", f"SAR {kpis['cost_per_unit']:.2f}")
 
 
 def bar_data(df: pd.DataFrame, group: str, value: str, top_n: int = 10) -> pd.DataFrame:
@@ -102,14 +131,16 @@ def rate_by_group(
         numerator=(numerator, "sum"),
         denominator=(denominator, "sum"),
     )
-    grouped[rate_name] = grouped["numerator"] / grouped["denominator"] * 100
+    grouped[rate_name] = grouped["numerator"].div(grouped["denominator"]).fillna(0) * 100
     return grouped[[rate_name]].sort_values(rate_name, ascending=False).head(top_n)
 
 
 df = load_data()
 
 st.title("Manufacturing Production Dashboard")
-st.caption("Production achievement, quality, downtime, and cost monitoring from the cleaned manufacturing dataset.")
+st.caption(
+    "Interactive monitoring for production achievement, product quality, machine downtime, and production cost."
+)
 
 min_date = df["production_date"].min().date()
 max_date = df["production_date"].max().date()
@@ -173,6 +204,15 @@ with overview_tab:
     st.subheader("Production by Product Line")
     st.bar_chart(bar_data(filtered, "product_line", "produced_quantity"))
 
+    st.subheader("Top Products by Actual Production")
+    st.dataframe(
+        bar_data(filtered, "product", "produced_quantity")
+        .rename(columns={"produced_quantity": "actual_production"})
+        .reset_index(),
+        use_container_width=True,
+        hide_index=True,
+    )
+
 with quality_tab:
     left, right = st.columns(2)
     left.subheader("Defect Rate by Product Line")
@@ -223,7 +263,7 @@ with cost_tab:
     cost_per_product = (
         filtered.groupby("product")
         .agg(production_cost=("production_cost", "sum"), produced_quantity=("produced_quantity", "sum"))
-        .assign(cost_per_unit=lambda x: x["production_cost"] / x["produced_quantity"])
+        .assign(cost_per_unit=lambda x: x["production_cost"].div(x["produced_quantity"]).fillna(0))
         [["cost_per_unit"]]
         .sort_values("cost_per_unit", ascending=False)
         .head(10)
@@ -256,4 +296,12 @@ with detail_tab:
         filtered[display_columns].sort_values("production_date", ascending=False),
         use_container_width=True,
         hide_index=True,
+        column_config={
+            "production_date": st.column_config.DateColumn("production_date"),
+            "production_cost": st.column_config.NumberColumn("production_cost", format="SAR %.2f"),
+            "production_achievement_pct": st.column_config.NumberColumn(
+                "production_achievement_pct", format="%.2f%%"
+            ),
+            "defect_rate_pct": st.column_config.NumberColumn("defect_rate_pct", format="%.2f%%"),
+        },
     )
