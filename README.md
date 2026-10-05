@@ -1,14 +1,14 @@
-# manufact
+# Inventara
 
-End-to-end manufacturing analytics project for monitoring production achievement, product quality, machine downtime, and production cost across Saudi manufacturing production orders from 2024 to 2026.
+Inventara is a manufacturing analytics workspace for monitoring production achievement, product quality, machine downtime, and production cost across Saudi manufacturing production orders from 2024 to 2026.
 
-The workflow uses Python for data cleaning and dashboard image generation, PostgreSQL for analytical querying, and notebooks for exploratory data analysis.
+The workflow uses Python for data cleaning and dashboard image generation, Streamlit for interactive monitoring, PostgreSQL for analytical querying, and notebooks for exploratory data analysis.
 
 ![Production Overview](images/overview.png)
 
 ## Business Context
 
-Manufacturing teams need a clear view of whether production output meets plan, which product lines create quality risk, which machines cause downtime, and which products drive high unit cost. This project turns raw production order data into clean analytical tables, KPI summaries, SQL-ready datasets, and dashboard preview images.
+Manufacturing teams need a clear view of whether production output meets plan, which product lines create quality risk, which machines cause downtime, and which products drive high unit cost. Inventara turns raw production order data into clean analytical tables, KPI summaries, SQL-ready datasets, dashboard preview images, and an interactive monitoring app.
 
 ## Key Questions
 
@@ -33,9 +33,9 @@ Manufacturing teams need a clear view of whether production output meets plan, w
 
 ## Dashboard Preview
 
-The dashboard previews are generated from the cleaned dataset using Python.
+The Inventara dashboard previews are generated from the cleaned dataset using Python.
 
-An interactive Streamlit dashboard is also available in `dashboard/app.py`.
+The interactive Inventara dashboard is available in `dashboard/app.py`.
 
 | Production Overview | Quality Analysis |
 | --- | --- |
@@ -54,7 +54,7 @@ An interactive Streamlit dashboard is also available in `dashboard/app.py`.
 - **PostgreSQL:** relational schema, import workflow, analytical SQL
 - **Jupyter Notebook:** exploratory data analysis
 
-## Project Structure
+## Repository Structure
 
 ```text
 data/
@@ -101,7 +101,7 @@ The cleaning pipeline standardizes column names, parses production dates, valida
 - `cost_per_unit`
 - calendar columns such as `year`, `quarter`, and `year_month`
 
-## How to Run
+## How to Run Inventara
 
 Install dependencies:
 
@@ -121,7 +121,7 @@ Generate dashboard preview images:
 python src/generate_dashboard_images.py
 ```
 
-Run the interactive Streamlit dashboard:
+Run the interactive Inventara dashboard:
 
 ```bash
 python -m streamlit run dashboard/app.py
@@ -138,7 +138,7 @@ Outputs:
 
 ## PostgreSQL Workflow
 
-This workflow is optional. Use it when you want to run KPI analysis in PostgreSQL; otherwise, the Python pipeline and generated dashboard images are enough to reproduce the project outputs.
+This workflow is optional. Use it when you want to run KPI analysis in PostgreSQL; otherwise, the Python pipeline, generated dashboard images, and Streamlit app are enough to reproduce the Inventara outputs.
 
 Automatic import:
 
@@ -164,7 +164,7 @@ Manual import:
 - **LED Panels** has the highest cost per unit at **SAR 118.84**.
 - Operational review should prioritize high-defect production lines, high-downtime machines, and products with above-average unit cost.
 
-## Deliverables
+## Generated Outputs
 
 - Cleaned manufacturing production dataset
 - Automated Python preprocessing pipeline
@@ -172,4 +172,4 @@ Manual import:
 - PostgreSQL schema and SQL analysis queries
 - KPI insight report
 - Python-generated dashboard preview images
-- Streamlit dashboard app
+- Inventara Streamlit dashboard app
