@@ -1,13 +1,5 @@
-# Dashboard Assets
+# Dashboard Notes
 
-This folder contains the Power BI implementation guide and reusable DAX measures.
+This project does not require Power BI. The main dashboard previews are generated with Python from the cleaned dataset and saved in `images/`.
 
-Power BI `.pbix` files are binary artifacts created in Power BI Desktop. To build the dashboard:
-
-1. Open Power BI Desktop.
-2. Import `data/processed/manufacturing_clean.csv` or connect to the PostgreSQL `production` table.
-3. Add the measures from `dax_measures.md`.
-4. Build the four pages described in `powerbi_build_guide.md`.
-5. Save the file as `dashboard/manufacturing_dashboard.pbix`.
-
-Preview images for the intended dashboard pages are available in `images/`.
+The Power BI guide and DAX measures in this folder are optional reference material only. Ignore them if you are using the Python-generated dashboard images as the final output.
