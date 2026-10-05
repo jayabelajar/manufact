@@ -82,6 +82,8 @@ images/
 
 Source file: `data/manufacturing-production-ksa-2024-2026.csv`
 
+Original dataset reference: [Predicting Manufacturing Defects Dataset](https://www.kaggle.com/datasets/rabieelkharoua/predicting-manufacturing-defects-dataset) by Rabie El Kharoua on Kaggle.
+
 The cleaning pipeline standardizes column names, parses production dates, validates production values, removes duplicates, and creates analysis-ready metrics:
 
 - `good_production`
