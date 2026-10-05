@@ -58,6 +58,7 @@ An interactive Streamlit dashboard is also available in `dashboard/app.py`.
 
 ```text
 data/
+  manufacturing-production-ksa-2024-2026.csv
   raw/manufacturing.csv
   processed/manufacturing_clean.csv
   processed/manufacturing_insights.md
@@ -87,7 +88,9 @@ images/
 
 Source file: `data/manufacturing-production-ksa-2024-2026.csv`
 
-Original dataset reference: [Predicting Manufacturing Defects Dataset](https://www.kaggle.com/datasets/rabieelkharoua/predicting-manufacturing-defects-dataset) by Rabie El Kharoua on Kaggle.
+Working raw file: `data/raw/manufacturing.csv`
+
+Original dataset reference: [Saudi Manufacturing Production Dataset 2024-2026](https://prime-levels.com/data-hub/saudi-manufacturing-production-orders-2024-2026) by Prime Levels. The dataset contains 3,000 Saudi manufacturing production work orders with output, defects, downtime, and costs in SAR for 2024-2026.
 
 The cleaning pipeline standardizes column names, parses production dates, validates production values, removes duplicates, and creates analysis-ready metrics:
 
