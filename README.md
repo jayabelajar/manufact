@@ -67,6 +67,8 @@ sql/
   03_data_cleaning.sql
   04_kpi_analysis.sql
   05_import_clean_csv.sql
+dashboard/
+  app.py
 src/
   preprocess.py
   import_to_postgres.py
@@ -111,6 +113,12 @@ Generate dashboard preview images:
 
 ```bash
 python src/generate_dashboard_images.py
+```
+
+Run the interactive Streamlit dashboard:
+
+```bash
+streamlit run dashboard/app.py
 ```
 
 Outputs:
