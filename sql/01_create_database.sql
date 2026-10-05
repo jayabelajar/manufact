@@ -1,1 +1,1 @@
-CREATE DATABASE inventara;
+CREATE DATABASE manufacturing_production;

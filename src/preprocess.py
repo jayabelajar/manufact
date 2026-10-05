@@ -8,8 +8,8 @@ import pandas as pd
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 RAW_PATH = ROOT_DIR / "data" / "raw" / "manufacturing.csv"
-PROCESSED_PATH = ROOT_DIR / "data" / "processed" / "inventara_clean.csv"
-INSIGHTS_PATH = ROOT_DIR / "data" / "processed" / "inventara_insights.md"
+PROCESSED_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_clean.csv"
+INSIGHTS_PATH = ROOT_DIR / "data" / "processed" / "manufacturing_insights.md"
 
 
 COLUMN_MAP = {
@@ -203,7 +203,7 @@ def build_insights(df: pd.DataFrame) -> str:
     top_machine = machine_perf.iloc[0]
     top_cost_product = cost_product.iloc[0]
 
-    return f"""# Inventara Production Insights
+    return f"""# Manufacturing Production Insights
 
 ## Executive KPI
 

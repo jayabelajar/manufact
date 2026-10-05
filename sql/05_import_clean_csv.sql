@@ -1,7 +1,7 @@
 -- psql import helper.
 -- Run from the project root after sql/02_create_tables.sql:
 --
--- \c inventara
+-- \c manufacturing_production
 -- \copy production (
 --     work_order_id,
 --     production_date,
@@ -28,6 +28,6 @@
 --     production_gap,
 --     cost_per_unit,
 --     source_defect_rate_pct
--- ) FROM 'data/processed/inventara_clean.csv' WITH (FORMAT csv, HEADER true);
+-- ) FROM 'data/processed/manufacturing_clean.csv' WITH (FORMAT csv, HEADER true);
 --
 -- Then run sql/03_data_cleaning.sql and sql/04_kpi_analysis.sql.
